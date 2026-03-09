@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Adarsh Jaiswal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Timeline Styles */
+        .timeline-section {
+            padding: var(--spacing-3xl) 0;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: var(--spacing-2xl);
+            display: flex;
+            align-items: center;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+            transition: all var(--transition-fast);
+        }
+        
+        .timeline-item:hover .timeline-dot {
+            transform: translateX(-50%) scale(1.1);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.5);
+        }
+        
+        .timeline-icon {
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .timeline-content {
+            width: 45%;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            position: relative;
+            transition: all var(--transition-fast);
+        }
+        
+        .timeline-item:hover .timeline-content {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.2);
+            border-color: var(--primary-color);
+        }
+        
+        .timeline-date {
+            font-size: 1.2rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .timeline-title {
+            font-size: 1.5rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .timeline-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .timeline-photo {
+            width: 100%;
+            height: 200px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-top: var(--spacing-md);
+        }
+        
+        .timeline-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-fast);
+        }
+        
+        .timeline-item:hover .timeline-photo img {
+            transform: scale(1.05);
+        }
+        
+        /* Personal Gallery Styles */
+        .personal-gallery {
+            padding: var(--spacing-3xl) 0;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-2xl);
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            height: 250px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-fast);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: var(--spacing-xl);
+            transform: translateY(100%);
+            transition: transform var(--transition-fast);
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        .gallery-info h3 {
+            color: white;
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .gallery-info p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+        
+        /* Animated About Hero Styles (No Colorful Design) */
+        .about-hero {
+            padding: var(--spacing-3xl) 0;
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-secondary);
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-2xl);
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-hero-title {
+            font-size: 3.5rem;
+            font-weight: var(--font-weight-bold);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .animated-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: wordAppear 0.5s forwards;
+        }
+        
+        @keyframes wordAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-2xl);
+        }
+        
+        .animated-stat {
+            text-align: center;
+            padding: var(--spacing-lg);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            transition: all var(--transition-fast);
+        }
+        
+        .animated-stat:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.2);
+            border-color: var(--primary-color);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: var(--font-weight-bold);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: var(--font-weight-medium);
+            margin-top: var(--spacing-sm);
+        }
+        
+        .profile-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .profile-wrapper {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+        
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--primary-color);
+            animation: profileFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes profileFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(2deg); }
+            75% { transform: translateY(5px) rotate(-2deg); }
+        }
+        
+        .profile-glow {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.3), transparent);
+            border-radius: 50%;
+            animation: glowPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        .profile-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+        
+        .particle:nth-child(1) { top: 20%; left: 10%; animation: floatParticle1 3s infinite; }
+        .particle:nth-child(2) { top: 30%; right: 15%; animation: floatParticle2 4s infinite; }
+        .particle:nth-child(3) { bottom: 25%; left: 20%; animation: floatParticle3 3.5s infinite; }
+        .particle:nth-child(4) { bottom: 15%; right: 10%; animation: floatParticle4 2.5s infinite; }
+        .particle:nth-child(5) { top: 50%; left: 5%; animation: floatParticle5 4.5s infinite; }
+        .particle:nth-child(6) { top: 60%; right: 5%; animation: floatParticle6 3.2s infinite; }
+        
+        @keyframes floatParticle1 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(10px, -15px); }
+        }
+        
+        @keyframes floatParticle2 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-12px, 10px); }
+        }
+        
+        @keyframes floatParticle3 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(15px, 8px); }
+        }
+        
+        @keyframes floatParticle4 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-8px, -12px); }
+        }
+        
+        @keyframes floatParticle5 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -5px); }
+        }
+        
+        @keyframes floatParticle6 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-15px, 15px); }
+        }
+        
+        /* Animated Story Section */
+        .story-section {
+            padding: var(--spacing-3xl) 0;
+            background: var(--bg-primary);
+        }
+        
+        .story-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--spacing-2xl);
+            align-items: center;
+        }
+        
+        .animated-title {
+            font-size: 2.5rem;
+            font-weight: var(--font-weight-bold);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .title-word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: titleSlideIn 0.6s forwards;
+        }
+        
+        .title-word:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        @keyframes titleSlideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .animated-divider {
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            width: 0;
+            animation: dividerGrow 1s forwards;
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes dividerGrow {
+            to { width: 100%; }
+        }
+        
+        .story-paragraph {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-lg);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: paragraphFadeIn 0.8s forwards;
+        }
+        
+        .story-paragraph:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        
+        @keyframes paragraphFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .highlight {
+            color: var(--primary-color);
+            font-weight: var(--font-weight-bold);
+            position: relative;
+        }
+        
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            animation: highlightGrow 1s forwards;
+            animation-delay: 1s;
+        }
+        
+        @keyframes highlightGrow {
+            to { width: 100%; }
+        }
+        
+        /* Anime Character Animation */
+        .anime-container {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            margin: 0 auto;
+        }
+        
+        .anime-character {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            animation: animeFloat 4s ease-in-out infinite;
+        }
+        
+        @keyframes animeFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(3deg); }
+            50% { transform: translateY(-5px) rotate(-2deg); }
+            75% { transform: translateY(-20px) rotate(1deg); }
+        }
+        
+        .anime-effects {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+        }
+        
+        .sparkle:nth-child(1) { top: 20%; left: 10%; animation: sparkle1 2s infinite; }
+        .sparkle:nth-child(2) { top: 30%; right: 20%; animation: sparkle2 2.5s infinite; }
+        .sparkle:nth-child(3) { bottom: 25%; left: 15%; animation: sparkle3 1.8s infinite; }
+        .sparkle:nth-child(4) { bottom: 15%; right: 10%; animation: sparkle4 2.2s infinite; }
+        .sparkle:nth-child(5) { top: 50%; left: 50%; animation: sparkle5 1.5s infinite; }
+        
+        @keyframes sparkle1 {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes sparkle2 {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes sparkle3 {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes sparkle4 {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes sparkle5 {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+        
+        .anime-glow {
+            position: absolute;
+            top: -30px;
+            left: -30px;
+            right: -30px;
+            bottom: -30px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.2), transparent);
+            border-radius: 50%;
+            animation: animeGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes animeGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .glitch {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                justify-content: center;
+            }
+            
+            .story-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .anime-container {
+                width: 200px;
+                height: 200px;
+            }
+        }
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                flex-direction: row !important;
+                margin-left: 60px;
+            }
+            
+            .timeline-dot {
+                left: 30px;
+                width: 40px;
+                height: 40px;
+            }
+            
+            .timeline-content {
+                width: 100%;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .about-hero {
+            padding: var(--spacing-3xl) 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .about-hero-title {
+            font-size: 3.5rem;
+            font-weight: var(--font-weight-bold);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .about-hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto var(--spacing-2xl);
+        }
+        
+        .team-section {
+            padding: var(--spacing-3xl) 0;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-2xl);
+        }
+        
+        .team-member {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            text-align: center;
+            transition: all var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+        
+        .team-member:hover::before {
+            opacity: 1;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+            border-color: var(--primary-color);
+        }
+        
+        .member-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto var(--spacing-lg);
+            overflow: hidden;
+            border: 4px solid var(--primary-color);
+            position: relative;
+            transition: all var(--transition-fast);
+        }
+        
+        .team-member:hover .member-photo {
+            transform: scale(1.1);
+            border-color: var(--secondary-color);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+        
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-fast);
+        }
+        
+        .team-member:hover .member-photo img {
+            transform: scale(1.1);
+        }
+        
+        .member-name {
+            font-size: 1.5rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .member-role {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            font-weight: var(--font-weight-medium);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .member-bio {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .member-social {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+        }
+        
+        .member-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all var(--transition-fast);
+        }
+        
+        .member-social a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+        
+        .story-section {
+            padding: var(--spacing-3xl) 0;
+        }
+        
+        .story-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .story-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-2xl);
+        }
+        
+        .value-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            text-align: center;
+            transition: all var(--transition-fast);
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.2);
+            border-color: var(--primary-color);
+        }
+        
+        .value-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin: 0 auto var(--spacing-md);
+        }
+        
+        .value-title {
+            font-size: 1.3rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .value-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="particles"></div>
+        <div class="gradient-overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">AJ</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="projects.html" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="certificates.html" class="nav-link">Certificates</a>
+                </li>
+                <li class="nav-item">
+                    <a href="videos.html" class="nav-link">Videos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="about-hero-title">About Adarsh Jaiswal</h1>
+                    <div class="hero-description">
+                        <p class="animated-text">
+                            <span class="word">Passionate</span>
+                            <span class="word">web</span>
+                            <span class="word">developer</span>
+                            <span class="word">dedicated</span>
+                            <span class="word">to</span>
+                            <span class="word">creating</span>
+                            <span class="word">innovative</span>
+                            <span class="word">digital</span>
+                            <span class="word">solutions</span>
+                            <span class="word">and</span>
+                            <span class="word">pushing</span>
+                            <span class="word">the</span>
+                            <span class="word">boundaries</span>
+                            <span class="word">of</span>
+                            <span class="word">modern</span>
+                            <span class="word">web</span>
+                            <span class="word">technology.</span>
+                        </p>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item animated-stat">
+                            <div class="stat-number" data-target="24">0</div>
+                            <div class="stat-label">Projects</div>
+                        </div>
+                        <div class="stat-item animated-stat">
+                            <div class="stat-number" data-target="12">0</div>
+                            <div class="stat-label">Certificates</div>
+                        </div>
+                        <div class="stat-item animated-stat">
+                            <div class="stat-number" data-target="5">0</div>
+                            <div class="stat-label">Years</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="profile-container">
+                        <div class="profile-wrapper">
+                            <img src="assets/profile-pro.png" alt="Adarsh Jaiswal" class="profile-img">
+                            <div class="profile-glow"></div>
+                            <div class="profile-particles">
+                                <span class="particle"></span>
+                                <span class="particle"></span>
+                                <span class="particle"></span>
+                                <span class="particle"></span>
+                                <span class="particle"></span>
+                                <span class="particle"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title animated-title">
+                    <span class="title-word">My</span>
+                    <span class="title-word">Journey</span>
+                </h2>
+                <div class="section-divider animated-divider"></div>
+            </div>
+            <div class="story-content">
+                <div class="story-text">
+                    <p class="story-paragraph animated-paragraph">
+                        <span class="highlight">My journey</span> in web development began with a simple curiosity about how websites work and evolved into a passion for creating beautiful, functional, and user-friendly digital experiences. With expertise in modern web technologies, I transform ideas into powerful digital solutions that make a difference.
+                    </p>
+                    <p class="story-paragraph animated-paragraph">
+                        I believe in <span class="highlight">continuous learning</span>, staying updated with the latest trends, and always pushing myself to create better, more innovative solutions. Every project is an opportunity to learn, grow, and make a positive impact.
+                    </p>
+                </div>
+                <div class="story-visual">
+                    <div class="anime-container">
+                        <img src="assets/anime-character.png" alt="Anime Character" class="anime-character">
+                        <div class="anime-effects">
+                            <div class="sparkle"></div>
+                            <div class="sparkle"></div>
+                            <div class="sparkle"></div>
+                            <div class="sparkle"></div>
+                            <div class="sparkle"></div>
+                        </div>
+                        <div class="anime-glow"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Timeline Section -->
+    <section class="timeline-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">My Journey</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">The path that shaped my career</p>
+            </div>
+            
+            <div class="timeline">
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">
+                        <div class="timeline-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2020</div>
+                        <h3 class="timeline-title">Started Web Development Journey</h3>
+                        <p class="timeline-description">
+                            Began learning HTML, CSS, and JavaScript. Built first static websites 
+                            and discovered passion for creating digital experiences.
+                        </p>
+                        <div class="timeline-photo">
+                            <img src="assets/journey-2020.jpg" alt="2020 Journey">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">
+                        <div class="timeline-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2021</div>
+                        <h3 class="timeline-title">Advanced JavaScript & React</h3>
+                        <p class="timeline-description">
+                            Mastered modern JavaScript concepts and React framework. 
+                            Built dynamic web applications and joined developer communities.
+                        </p>
+                        <div class="timeline-photo">
+                            <img src="assets/journey-2021.jpg" alt="2021 Journey">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">
+                        <div class="timeline-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2022</div>
+                        <h3 class="timeline-title">Full-Stack Development</h3>
+                        <p class="timeline-description">
+                            Learned Node.js, Express, and MongoDB. Created complete web applications 
+                            with frontend and backend integration.
+                        </p>
+                        <div class="timeline-photo">
+                            <img src="assets/journey-2022.jpg" alt="2022 Journey">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">
+                        <div class="timeline-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2023</div>
+                        <h3 class="timeline-title">Professional Projects & Certifications</h3>
+                        <p class="timeline-description">
+                            Completed 10+ professional projects, earned multiple certifications, 
+                            and started freelancing for international clients.
+                        </p>
+                        <div class="timeline-photo">
+                            <img src="assets/journey-2023.jpg" alt="2023 Journey">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 5 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">
+                        <div class="timeline-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024</div>
+                        <h3 class="timeline-title">Portfolio Launch & Growth</h3>
+                        <p class="timeline-description">
+                            Launched professional portfolio, expanded to 24+ projects, 
+                            and established strong online presence as a developer.
+                        </p>
+                        <div class="timeline-photo">
+                            <img src="assets/journey-2024.jpg" alt="2024 Journey">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 6 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">
+                        <div class="timeline-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2025</div>
+                        <h3 class="timeline-title">Advanced Technologies & AI Integration</h3>
+                        <p class="timeline-description">
+                            Exploring AI/ML integration, advanced React patterns, 
+                            and building innovative solutions with cutting-edge technologies.
+                        </p>
+                        <div class="timeline-photo">
+                            <img src="assets/journey-2025.jpg" alt="2025 Journey">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personal Gallery Section -->
+    <section class="personal-gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Personal Moments</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Behind the code - my personal journey</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="assets/personal-1.jpg" alt="Personal Moment 1">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Coding Sessions</h3>
+                            <p>Late night coding marathons</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="assets/personal-2.jpg" alt="Personal Moment 2">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Project Launch</h3>
+                            <p>Celebrating successful deployments</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="assets/personal-3.jpg" alt="Personal Moment 3">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Learning New Tech</h3>
+                            <p>Exploring new frameworks</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="assets/personal-4.jpg" alt="Personal Moment 4">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Team Collaboration</h3>
+                            <p>Working with amazing people</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="assets/personal-5.jpg" alt="Personal Moment 5">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Achievement Unlocked</h3>
+                            <p>Certification milestones</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="assets/personal-6.jpg" alt="Personal Moment 6">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Creative Break</h3>
+                            <p>Finding inspiration everywhere</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Values</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Principles that guide our work</p>
+            </div>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="value-title">Innovation</h3>
+                    <p class="value-description">
+                        Always pushing boundaries and exploring new technologies 
+                        to create cutting-edge solutions.
+                    </p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="value-title">Passion</h3>
+                    <p class="value-description">
+                        Deep love for what we do drives us to create 
+                        exceptional digital experiences.
+                    </p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="value-title">Collaboration</h3>
+                    <p class="value-description">
+                        Working together as a team to achieve 
+                        extraordinary results.
+                    </p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 class="value-title">Excellence</h3>
+                    <p class="value-description">
+                        Committed to delivering the highest quality 
+                        in everything we create.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>&copy; 2026 Adarsh Jaiswal. All rights reserved.</p>
+                </div>
+                <div class="social-links">
+                    <a href="https://instagram.com/adar.xhevil" target="_blank" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="mailto:adarshjaiswalxadyo@gmail.com" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://github.com/adarshjaiswalxadyo-spec" target="_blank" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animate words on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const words = document.querySelectorAll('.word');
+            words.forEach((word, index) => {
+                word.style.animationDelay = `${index * 0.1}s`;
+            });
+            
+            // Animate stat numbers
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-target'));
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    stat.textContent = Math.floor(current);
+                }, 30);
+            });
+        });
+    </script>
+    <script src="js/main.js"></script>
+</body>
+</html>
