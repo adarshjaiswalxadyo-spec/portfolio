@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos - Adarsh Jaiswal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="particles"></div>
+        <div class="gradient-overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">AJ</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="projects.html" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="certificates.html" class="nav-link">Certificates</a>
+                </li>
+                <li class="nav-item">
+                    <a href="videos.html" class="nav-link active">Videos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Videos Section -->
+    <section class="videos">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">Video Gallery</h1>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Showcasing projects, tutorials, and creative experiments</p>
+            </div>
+
+            <!-- Featured Video -->
+            <div class="featured-video">
+                <div class="featured-video-container">
+                    <video id="featuredVideoPlayer" class="video-player" controls poster="assets/featured-video-thumbnail.jpg">
+                        <source src="assets/featured-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+
+            <!-- Video Categories -->
+            <div class="video-categories">
+                <button class="category-btn active" data-category="all">All Videos</button>
+                <button class="category-btn" data-category="tutorials">Tutorials</button>
+                <button class="category-btn" data-category="projects">Project Demos</button>
+                <button class="category-btn" data-category="creative">Creative</button>
+                <button class="category-btn" data-category="anime">Anime</button>
+                <button class="category-btn" data-category="coding">Coding</button>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="video-search">
+                <div class="search-container">
+                    <input type="text" id="videoSearch" placeholder="Search videos..." class="search-input">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Videos Grid -->
+            <div class="videos-grid">
+                <!-- Video 1 -->
+                <div class="video-card" data-category="tutorials">
+                    <div class="video-thumbnail">
+                        <video class="video-player-small" controls poster="assets/video1-thumbnail.jpg">
+                            <source src="assets/video1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-duration">12:45</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">CSS Grid Layout Tutorial</h3>
+                        <p class="video-description">Master CSS Grid with practical examples</p>
+                        <div class="video-meta">
+                            <span class="video-date">March 2024</span>
+                            <span class="video-views">1.2K views</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="video-card" data-category="projects">
+                    <div class="video-thumbnail">
+                        <video class="video-player-small" controls poster="assets/video2-thumbnail.jpg">
+                            <source src="assets/video2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-duration">8:30</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">React Project Showcase</h3>
+                        <p class="video-description">Complete React application with modern hooks</p>
+                        <div class="video-meta">
+                            <span class="video-date">February 2024</span>
+                            <span class="video-views">856 views</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="video-card" data-category="anime">
+                    <div class="video-thumbnail">
+                        <video class="video-player-small" controls poster="assets/video3-thumbnail.jpg">
+                            <source src="assets/video3.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-duration">6:15</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Anime Character Animation</h3>
+                        <p class="video-description">Creating animated anime characters</p>
+                        <div class="video-meta">
+                            <span class="video-date">January 2024</span>
+                            <span class="video-views">2.1K views</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 4 -->
+                <div class="video-card" data-category="tutorials">
+                    <div class="video-thumbnail">
+                        <video class="video-player-small" controls poster="assets/video4-thumbnail.jpg">
+                            <source src="assets/video4.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-duration">15:20</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Node.js Backend Development</h3>
+                        <p class="video-description">Building scalable backend APIs</p>
+                        <div class="video-meta">
+                            <span class="video-date">December 2023</span>
+                            <span class="video-views">3.5K views</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 5 -->
+                <div class="video-card" data-category="anime">
+                    <div class="video-thumbnail">
+                        <video class="video-player-small" controls poster="assets/video5-thumbnail.jpg">
+                            <source src="assets/video5.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-duration">10:45</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Anime Style Effects</h3>
+                        <p class="video-description">Japanese anime-inspired visual effects</p>
+                        <div class="video-meta">
+                            <span class="video-date">November 2023</span>
+                            <span class="video-views">1.8K views</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 6 -->
+                <div class="video-card" data-category="coding">
+                    <div class="video-thumbnail">
+                        <video class="video-player-small" controls poster="assets/video6-thumbnail.jpg">
+                            <source src="assets/video6.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-duration">7:30</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Interactive Games Collection</h3>
+                        <p class="video-description">Fun browser-based games</p>
+                        <div class="video-meta">
+                            <span class="video-date">October 2023</span>
+                            <span class="video-views">2.4K views</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More Button -->
+            <div class="load-more-container">
+                <button class="btn btn-secondary" id="loadMoreVideos">
+                    <span>Load More Videos</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>&copy; 2026 Adarsh Jaiswal. All rights reserved.</p>
+                </div>
+                <div class="social-links">
+                    <a href="https://instagram.com/adar.xhevil" target="_blank" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/adarshjaiswalxadyo" target="_blank" class="social-link">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/adarshjaiswalxadyo-spec" target="_blank" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:adarshjaiswalxadyo@gmail.com" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
